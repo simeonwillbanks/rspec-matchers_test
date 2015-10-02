@@ -5,11 +5,23 @@ RSpec::Matchers.define :be_blue do
     string == "blue"
   end
 
-  failure_message_for_should do |string|
+  failure_message_method = if defined?(failure_message)
+                             :failure_message
+                           else
+                             :failure_message_for_should
+                           end
+
+  send(failure_message_method) do |string|
     "'#{string}' is not blue"
   end
 
-  failure_message_for_should_not do |string|
+  failure_message_when_negated_method = if defined?(failure_message_when_negated)
+                                          :failure_message_when_negated
+                                        else
+                                          :failure_message_for_should_not
+                                        end
+
+  send(failure_message_when_negated_method) do |string|
     "'#{string}' is blue"
   end
 end
