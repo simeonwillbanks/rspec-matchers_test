@@ -11,6 +11,8 @@ RSpec::Matchers.define :be_blue do
                              :failure_message_for_should
                            end
 
+  puts "failure_message_method: '#{failure_message_method}'"
+
   send(failure_message_method) do |string|
     "'#{string}' is not blue"
   end
@@ -20,6 +22,8 @@ RSpec::Matchers.define :be_blue do
                                         else
                                           :failure_message_for_should_not
                                         end
+
+  puts "failure_message_when_negated_method: '#{failure_message_when_negated_method}'"
 
   send(failure_message_when_negated_method) do |string|
     "'#{string}' is blue"
